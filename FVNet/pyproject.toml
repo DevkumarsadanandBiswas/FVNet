@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "fvnet"
+version = "1.0.0"
+description = "Foreground-VesselNet: 2D/3D blood vessel segmentation (CTA / MRA / MRI / fundus)"
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+dependencies = ["torch>=2.0", "numpy", "scipy", "scikit-image", "scikit-learn", "pandas", "matplotlib", "pyyaml", "pillow", "nibabel"]
+
+[project.optional-dependencies]
+dev = ["pytest"]
+
+[project.scripts]
+fvnet-preprocess = "fvnet.cli:preprocess_main"
+fvnet-train = "fvnet.cli:train_main"
+fvnet-test = "fvnet.cli:test_main"
+fvnet-predict = "fvnet.cli:predict_main"
+fvnet-all = "fvnet.cli:all_main"
+
+[tool.setuptools.packages.find]
+include = ["fvnet*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

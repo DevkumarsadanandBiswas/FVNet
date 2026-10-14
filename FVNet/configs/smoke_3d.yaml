@@ -1,0 +1,9 @@
+# Tiny CPU-friendly config used by tests / `make smoke` with scripts/make_synthetic_data.py --dim 3
+dim: 3
+out: runs/smoke_3d
+data: {root: data/synth3d, layout: flat, image_dir: images, label_dir: labels, cache: runs/smoke_3d/cache}
+preprocess: {target: [48, 48, 32], window: [-100, 700], sigmas: [0.8, 1.2, 1.8]}
+model: {filters: [8, 16, 32, 64]}
+train: {patch: [32, 32, 32], batch: 2, epochs: 2, iters: 2, full_val_every: 1, n_val_patches: 2, amp: false}
+infer: {roi: [32, 32, 32]}
+test: {tta: false, n_slices: 3, min_cc: 5}

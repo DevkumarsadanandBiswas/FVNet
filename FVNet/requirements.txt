@@ -1,0 +1,10 @@
+torch>=2.0
+numpy
+scipy
+scikit-image
+scikit-learn
+pandas
+matplotlib
+pyyaml
+pillow
+nibabel

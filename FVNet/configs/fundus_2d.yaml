@@ -1,0 +1,27 @@
+# Foreground-VesselNet on 2D retinal fundus vessel datasets (DRIVE / STARE / CHASE_DB1 / HRF ...)
+dim: 2
+out: outputs_fvnet_2d
+data:
+  root: data/DRIVE                  # any folder holding image + mask files
+  layout: flat
+  image_dir: images                 # <root>/images/21_training.tif ...
+  label_dir: labels                 # <root>/labels/21_manual1.gif ...  (matched by leading id: "21")
+  fov_dir: null                     # optional <root>/fov masks; pixels outside the FOV are zeroed
+  cache: cache_2d
+preprocess:
+  target: null                      # null = keep native resolution
+  channel: green                    # green channel has the best vessel contrast in fundus images (or "gray")
+  clahe: true
+  sigmas: [1.0, 1.5, 2.0, 3.0]
+  bright_vessels: false             # vessels are dark in the green channel -> inverted before Frangi
+train:
+  patch: [256, 256]
+  batch: 8
+  epochs: 150
+  iters: 80
+  lr: 1.0e-3
+infer:
+  roi: [256, 256]
+test:
+  tta: true
+  min_cc: 20

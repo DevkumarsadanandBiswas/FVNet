@@ -1,0 +1,19 @@
+# Example: cerebral / abdominal MRA or CTA volumes in a flat folder layout (3D)
+dim: 3
+out: outputs_fvnet_mra
+data:
+  root: data/MRA
+  layout: flat
+  image_dir: images                 # images/<id>.nii.gz
+  label_dir: labels                 # labels/<id>.nii.gz
+  cache: cache_mra
+preprocess:
+  ras: true
+  target: [256, 256, 128]
+  window: [0, 1000]                 # MRA intensities: set to the raw intensity range you want mapped to [0,1]
+  bright_vessels: true
+train:
+  patch: [96, 96, 96]
+  epochs: 150
+infer:
+  roi: [128, 128, 96]

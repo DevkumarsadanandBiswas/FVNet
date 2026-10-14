@@ -1,0 +1,24 @@
+# Foreground-VesselNet on ImageCAS coronary CTA (3D)  -- the setup used in the original Kaggle notebook
+dim: 3
+out: outputs_fvnet_3d
+data:
+  root: /kaggle/input/datasets/rj1007/imagecas      # folders like 1.img.nii/ and 1.label.nii/ (layout: imagecas)
+  layout: imagecas                                  # imagecas | flat  (flat = images/*.nii.gz + labels/*.nii.gz)
+  cache: cache_3d
+preprocess:
+  ras: true                                         # orientation standardisation (closest canonical RAS)
+  target: [256, 256, 160]                           # resample every volume to this grid
+  window: [-100, 700]                               # CT HU window -> [0,1]
+  sigmas: [0.8, 1.2, 1.8, 2.5]                      # Frangi scales
+  bright_vessels: true                              # contrast-enhanced CTA: vessels are bright
+train:
+  patch: [96, 96, 96]
+  batch: 2
+  epochs: 100
+  iters: 80
+  lr: 1.0e-3
+infer:
+  roi: [128, 128, 96]
+test:
+  tta: true
+  min_cc: 30
