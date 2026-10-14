@@ -1,6 +1,6 @@
 # Foreground-VesselNet (FVNet): 2D / 3D Blood Vessel Segmentation
 
-![FVNet architecture](assets/architecture.png)
+![FVNet architecture](FVNet/assets/architecture.png)
 
 FVNet is a foreground-aware encoder–decoder for thin tubular structures (coronary arteries, cerebral/abdominal
 vessels, retinal vessels). **One code base, two modes:** set `dim: 3` for volumes (CTA / MRA / MRI, NIfTI) or
